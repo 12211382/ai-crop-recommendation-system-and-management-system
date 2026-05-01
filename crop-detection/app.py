@@ -778,24 +778,44 @@ def init_db():
             print("[OK] Default admin user created (admin@crop.ai / admin123)")
 
 
-if __name__ == '__main__':
-    # Create upload directory if not exists
+# if __name__ == '__main__':
+#     # Create upload directory if not exists
+#     os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
+#     os.makedirs('database', exist_ok=True)
+    
+#     # Initialize database
+#     init_db()
+    
+#     # Load ML models
+#     load_disease_model()
+#     load_crop_models()
+    
+#     # Run application
+#     print("\n" + "="*60)
+#     print("AI-Driven Crop Disease Prediction System")
+#     print("="*60)
+#     print("Server starting at http://127.0.0.1:5000")
+#     print("Default admin: admin@crop.ai / admin123")
+#     print("="*60 + "\n")
+    
+#     app.run(debug=True, host='127.0.0.1', port=5000)
+
+
+
+
+
+
+
+
+with app.app_context():
     os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
     os.makedirs('database', exist_ok=True)
-    
-    # Initialize database
+
     init_db()
-    
-    # Load ML models
     load_disease_model()
     load_crop_models()
-    
-    # Run application
-    print("\n" + "="*60)
-    print("AI-Driven Crop Disease Prediction System")
-    print("="*60)
-    print("Server starting at http://127.0.0.1:5000")
-    print("Default admin: admin@crop.ai / admin123")
-    print("="*60 + "\n")
-    
-    app.run(debug=True, host='127.0.0.1', port=5000)
+
+
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
